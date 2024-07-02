@@ -8,8 +8,10 @@
 #include "common.h"
 #include "chunk.h" // did this on prefire i am so fkicn good in C.
 #include "debug.h"
+#include "virtual_machine.h"
 
 int main(int argc, const char * argv[]) {
+    initVM();
     Chunk chunk;
     initChunk(&chunk);
 
@@ -19,6 +21,8 @@ int main(int argc, const char * argv[]) {
 
     writeChunk(&chunk, OP_RETURN, 123);
     disassembleChunk(&chunk, "test chunk");
+    interpret(&chunk); // TODO: 
+    freeVM();
     freeChunk(&chunk);
     return 0;
 }
