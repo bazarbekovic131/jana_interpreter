@@ -25,12 +25,16 @@ typedef enum {
 typedef struct {
     int count;
     int capacity;
+    int* lines; // change this to runlength or something.
+    // research this.
+    
+    
     uint8_t* code;
     ValueArray constants;
 } Chunk;
 
 void initChunk(Chunk* chunk);
-void writeChunk(Chunk* chunk, uint8_t byte);
+void writeChunk(Chunk* chunk, uint8_t byte, int line);
 void freeChunk(Chunk* chunk);
 int addConstant(Chunk* chunk, Value value);
 
