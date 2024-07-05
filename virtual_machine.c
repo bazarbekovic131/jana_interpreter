@@ -38,9 +38,24 @@ Value pop() {
 InterpretResult run() {
     #define READ_BYTE() (*vm.ip++)
     #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
+    #define BINARY_OP(op) \
+        do { \
+            double a = pop(); \
+            double b = pop(); \
+            push(a op b);  \
+        } while (false) \
 
     for (;;) {
 #ifdef DEBUG_TRACE_EXECUTION
+    printf("          "); // some text
+    
+    for (Value* slot; slot<vm.stackTop; slot++) {
+        printf("[ ");
+        printValue(*slot);
+        printf(" ]");
+    }
+    printf("\n");
+
     disassembleInstruction(vm.chunk, (int)(vm.ip - vm.chunk->code));
 #endif
         uint8_t instruction;
@@ -56,8 +71,28 @@ InterpretResult run() {
                 push(a + b);
                 break;
             }
+            case OP_SUBTRACT: {
+                double b = pop();
+                double a = pop();
+                push(a - b);
+                break;
+            }
+            case OP_MULTIPLY: {
+                BINARY_OP(*);
+                break;
+            }
+            case OP_DIV: {
+                BINARY_OP(/);
+                break;
+            }
+            case OP_NEGATE: {
+                push(-pop());
+                break;
+            }
             // Handle other opcodes similarly
             case OP_RETURN: {
+                printValue(pop());
+                printf("\n");
                 return INTERPRET_OK;
             }
         }
@@ -65,6 +100,7 @@ InterpretResult run() {
 
     #undef READ_BYTE
     #undef READ_CONSTANT
+    #undef BINARY_OP
 }
 
 InterpretResult interpret(Chunk* chunk) {

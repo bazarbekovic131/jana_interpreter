@@ -14,10 +14,11 @@
 typedef enum {
     OP_CONSTANT,
     OP_ADD,
-    OP_SUBSTRACT,
+    OP_SUBTRACT,
     OP_MULTIPLY,
     OP_DIV,
     OP_RETURN,
+    OP_NEGATE, // negation opcode
 } OpCode;
 
 // i wrote a lot of explanation on this and then i lost it all, that's so fcking bad.

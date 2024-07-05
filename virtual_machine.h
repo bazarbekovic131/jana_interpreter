@@ -9,6 +9,7 @@
 #define virtual_machine_h
 
 #include "chunk.h"
+#include "value.h"
 
 #define STACK_MAX 256 // not doing this dynamical will lead to stack overflow.
 
