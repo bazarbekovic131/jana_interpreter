@@ -5,17 +5,33 @@
 //  Created by Akha on 02.07.2024.
 //
 
+#include <stdio.h>
 #include "common.h"
 #include "virtual_machine.h"
+#include "debug.h" // i am good at prefiring these
 
 VirtualMachine vm;
 
+static void resetStack() {
+  vm.stackTop = vm.stack;
+}
+
 void initVM() {
-    
+    resetStack();
 }
 
 void freeVM() {
     
+}
+
+void push(Value value) {
+    *vm.stackTop = value;
+    vm.stackTop++;
+}
+
+Value pop() {
+    vm.stackTop--; // return back to the most recent value
+    return *vm.stackTop; // return it's index
 }
 
 
@@ -24,6 +40,9 @@ InterpretResult run() {
     #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
 
     for (;;) {
+#ifdef DEBUG_TRACE_EXECUTION
+    disassembleInstruction(vm.chunk, (int)(vm.ip - vm.chunk->code));
+#endif
         uint8_t instruction;
         switch (instruction = READ_BYTE()) {
             case OP_CONSTANT: {

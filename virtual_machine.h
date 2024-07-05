@@ -10,9 +10,13 @@
 
 #include "chunk.h"
 
+#define STACK_MAX 256 // not doing this dynamical will lead to stack overflow.
+
 typedef struct {
     Chunk* chunk;
     uint8_t* ip; // byte pointer - instruction pointer | alternative is PC - program counter. that's more understandable.
+    Value stack[STACK_MAX];
+    Value* stackTop; // first in last out is the stack. top points to where the next value needs to be inserted.
 } VirtualMachine;
 
 typedef enum {
@@ -23,5 +27,9 @@ typedef enum {
 
 void initVM();
 void freeVM();
+
+InterpretResult interpret(Chunk* chunk);
+void push(Value value);
+Value pop();
 
 #endif /* virtual_machine_h */
