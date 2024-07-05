@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include "common.h"
+#include "compiler.h"
 #include "virtual_machine.h"
 #include "debug.h" // i am good at prefiring these
 
@@ -102,10 +103,14 @@ InterpretResult run() {
     #undef READ_CONSTANT
     #undef BINARY_OP
 }
-
-InterpretResult interpret(Chunk* chunk) {
+InterpretResult interpret_chunk(Chunk* chunk) {
     vm.chunk = chunk;
     vm.ip = vm.chunk->code; // IP keeps track of where VM is
     return run();
+}
+
+InterpretResult interpret(const char* source) {
+    compile(source);
+    return INTERPRET_OK;
 }
 
