@@ -18,21 +18,35 @@ void freeVM() {
     
 }
 
-static InterpretResult run() {
-#define READ_BYTE() (*vm.ip++) // Instruction pointer will always have the address of the next instruction.
+
+InterpretResult run() {
+    #define READ_BYTE() (*vm.ip++)
+    #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
+
     for (;;) {
         uint8_t instruction;
         switch (instruction = READ_BYTE()) {
-            case OP_RETURN:
+            case OP_CONSTANT: {
+                Value constant = READ_CONSTANT();
+                push(constant);
+                break;
+            }
+            case OP_ADD: {
+                double b = pop();
+                double a = pop();
+                push(a + b);
+                break;
+            }
+            // Handle other opcodes similarly
+            case OP_RETURN: {
                 return INTERPRET_OK;
-                
-            default:
-                return INTERPRET_COMPILE_ERROR;
+            }
         }
     }
-#undef READ_BYTE
-}
 
+    #undef READ_BYTE
+    #undef READ_CONSTANT
+}
 
 InterpretResult interpret(Chunk* chunk) {
     vm.chunk = chunk;

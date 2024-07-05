@@ -41,3 +41,12 @@ int addConstant(Chunk* chunk, Value value) {
     writeValueArray(&chunk->constants, value);
     return chunk->constants.count - 1;
 }
+
+// void compile(const char* source, Chunk* chunk) {
+//     // Tokenize and parse the source code
+//     // Convert parsed structures to bytecode
+//     // Example for adding a constant:
+//     int constant = addConstant(chunk, 1.2);
+//     writeChunk(chunk, OP_CONSTANT, line);
+//     writeChunk(chunk, constant, line);
+// }

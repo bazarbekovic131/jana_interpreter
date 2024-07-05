@@ -12,12 +12,12 @@
 #include "value.h" // i only remember that i prefired i am so good.
 
 typedef enum {
-    OP_RETURN,
     OP_CONSTANT,
     OP_ADD,
     OP_SUBSTRACT,
     OP_MULTIPLY,
     OP_DIV,
+    OP_RETURN,
 } OpCode;
 
 // i wrote a lot of explanation on this and then i lost it all, that's so fcking bad.
