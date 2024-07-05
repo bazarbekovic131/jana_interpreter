@@ -42,6 +42,12 @@ int addConstant(Chunk* chunk, Value value) {
     return chunk->constants.count - 1;
 }
 
+/*
+
+Line Analogs
+
+*/
+
 // void compile(const char* source, Chunk* chunk) {
 //     // Tokenize and parse the source code
 //     // Convert parsed structures to bytecode
@@ -49,4 +55,25 @@ int addConstant(Chunk* chunk, Value value) {
 //     int constant = addConstant(chunk, 1.2);
 //     writeChunk(chunk, OP_CONSTANT, line);
 //     writeChunk(chunk, constant, line);
+// }
+
+
+// void writeChunk(Chunk* chunk, int bytecode, int lineNumber) {
+//     if (chunk->count + 1 > chunk->capacity) {
+//         // Code to grow the 'code' array
+//     }
+//     chunk->code[chunk->count++] = bytecode;
+
+//     // Check if the current line number matches the last line number
+//     if (chunk->lineCount > 0 && chunk->lines[chunk->lineCount - 1].lineNumber == lineNumber) {
+//         chunk->lines[chunk->lineCount - 1].count++;
+//     } else {
+//         // Add new line info or grow the 'lines' array
+//         if (chunk->lineCount + 1 > chunk->lineCapacity) {
+//             // Code to grow the 'lines' array
+//         }
+//         chunk->lines[chunk->lineCount].lineNumber = lineNumber;
+//         chunk->lines[chunk->lineCount].count = 1;
+//         chunk->lineCount++;
+//     }
 // }
