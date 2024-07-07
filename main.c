@@ -84,26 +84,27 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-//     Chunk chunk;
-//     initChunk(&chunk);
+void test_0(void) {
+    Chunk chunk;
+    initChunk(&chunk);
 
-//     int constant = addConstant(&chunk, 1.2);
-//     writeChunk(&chunk, OP_CONSTANT, 123);
-//     writeChunk(&chunk, constant, 123);
-    
-//     constant = addConstant(&chunk, 3.4);
-//     writeChunk(&chunk, OP_CONSTANT, 123);
-//     writeChunk(&chunk, constant, 123);
-//     writeChunk(&chunk, OP_ADD, 123);
-//     constant = addConstant(&chunk, 5.6);
-//     writeChunk(&chunk, OP_CONSTANT, 123);
-//     writeChunk(&chunk, constant, 123);
+    int constant = addConstant(&chunk, 1.2);
+    writeChunk(&chunk, OP_CONSTANT, 123);
+    writeChunk(&chunk, constant, 123);
 
-//     writeChunk(&chunk, OP_DIV, 123);
-//     writeChunk(&chunk, OP_NEGATE, 123); // test negation instruction
+    constant = addConstant(&chunk, 3.4);
+    writeChunk(&chunk, OP_CONSTANT, 123);
+    writeChunk(&chunk, constant, 123);
+    writeChunk(&chunk, OP_ADD, 123);
+    constant = addConstant(&chunk, 5.6);
+    writeChunk(&chunk, OP_CONSTANT, 123);
+    writeChunk(&chunk, constant, 123);
 
-//     writeChunk(&chunk, OP_RETURN, 123);
-//     disassembleChunk(&chunk, "test chunk");
-//     interpret(&chunk); // TODO: 
+    writeChunk(&chunk, OP_DIV, 123);
+    writeChunk(&chunk, OP_NEGATE, 123); // test negation instruction
 
-//     // ... freeVM(); freeChunk(&chunk);
+    writeChunk(&chunk, OP_RETURN, 123);
+    disassembleChunk(&chunk, "test chunk");
+    interpret_chunk(&chunk); // TODO:
+     // ... freeVM(); freeChunk(&chunk);
+ }
